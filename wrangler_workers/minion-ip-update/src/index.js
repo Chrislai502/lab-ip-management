@@ -9,20 +9,20 @@
  */
 
 // Define global HTML template parts
-const htmlHeader = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Network Devices Status</title>
-</head>
-<body>
-    <h1>Network Devices Status</h1>
-    <ul>`;
-const htmlFooter = `
-    </ul>
-</body>
-</html>`;
+// const htmlHeader = `
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <title>Network Devices Status</title>
+// </head>
+// <body>
+//     <h1>Network Devices Status</h1>
+//     <ul>`;
+// const htmlFooter = `
+//     </ul>
+// </body>
+// </html>`;
 
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request));
@@ -63,9 +63,9 @@ async function handleUpdate(request) {
 
   try {
     const { uniqueName, username, ip } = await request.json();
-    // Composite key: combines uniqueName and username for uniqueness
     const key = `device-${uniqueName}`;
-    const value = JSON.stringify({ username, ip });
+    const now = new Date();
+    const value = JSON.stringify({ username, ip, lastUpdated: now.toISOString() });
     await DEVICE_DATA.put(key, value);
     return new Response("Device updated successfully", { status: 200 });
   } catch (e) {
@@ -73,17 +73,60 @@ async function handleUpdate(request) {
   }
 }
 
-// Serve webpage with list of devices
+// Serve webpage with list of devices in a styled table
+// <style>
+//     /* Existing CSS styles... */
+//     table { width: 100%; border-collapse: collapse; }
+//     th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
+//     /* Additional styles... */
+// </style>
 async function handleView(request) {
-  let htmlContent = htmlHeader;
+  let htmlContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ROAR Network Devices Current IP</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
+      h1 { color: #333; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
+      th { background-color: #4CAF50; color: white; }
+      tr:nth-child(even) { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Network Devices Status</h1>
+    <table>
+        <tr>
+            <th>Computer Name</th>
+            <th>Username</th>
+            <th>IP Address</th>
+            <th>Last Updated</th>
+        </tr>`;
+
   const keys = await DEVICE_DATA.list();
   for (const key of keys.keys) {
     const data = await DEVICE_DATA.get(key.name);
     if (data) {
-      const { username, ip } = JSON.parse(data);
-      htmlContent += `<li>${key.name.replace('device-', '')} (User: ${username}) - IP: ${ip}</li>`;
+      const { username, ip, lastUpdated } = JSON.parse(data);
+      // Format the timestamp for readability
+      const formattedTime = new Date(lastUpdated).toLocaleString();
+      htmlContent += `
+        <tr>
+            <td>${key.name.replace('device-', '')}</td>
+            <td>${username}</td>
+            <td>${ip}</td>
+            <td>${formattedTime}</td>
+        </tr>`;
     }
   }
-  htmlContent += htmlFooter;
+
+  htmlContent += `
+    </table>
+</body>
+</html>`;
+
   return new Response(htmlContent, { headers: { 'Content-Type': 'text/html' }, status: 200 });
 }
