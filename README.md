@@ -2,6 +2,10 @@
 
 This project provides scripts for automatically updating a centralized server with the current IP addresses of Ubuntu and Windows machines within a private network. The updates are sent to a Cloudflare Worker, which then stores these IP addresses for easy access and management.
 
+### Minimal Display [Link Here](https://minion-ip-update.wxunlai.workers.dev/view)
+![image](https://github.com/Chrislai502/lab-ip-management/assets/66889149/b72cb2a0-6213-4a46-a4f2-76dabb91975a)
+
+
 ## Setup Instructions (Ubuntu and Windows)
 
 ### Prerequisites:
@@ -79,6 +83,7 @@ This project provides scripts for automatically updating a centralized server wi
     - Open Task Scheduler and create a new task.
     - Set the trigger to your preferred schedule.
     - For the action, choose "Start a Program" with `powershell.exe` as the program and `-ExecutionPolicy Bypass -File "path\to\update-ip.ps1"` as the arguments.
+
 
 ## Security Note
 
