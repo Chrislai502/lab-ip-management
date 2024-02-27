@@ -1,0 +1,15 @@
+# Dependency directories
+node_modules/
+
+# Environment secrets
+.env
+
+# Build output
+dist/
+
+# Wrangler built files
+worker/script.js
+wrangler.toml
+
+# OS generated files
+.DS_Store
