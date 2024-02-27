@@ -2,16 +2,16 @@
 
 This project provides scripts for automatically updating a centralized server with the current IP addresses of Ubuntu and Windows machines within a private network. The updates are sent to a Cloudflare Worker, which then stores these IP addresses for easy access and management.
 
-## Setup Instructions
+## Setup Instructions (Ubuntu and Windows)
 
-### Prerequisites
+### Prerequisites:
 
 - A Cloudflare account with Workers enabled.
 - A Cloudflare Worker deployed to accept and store IP address updates.
 - The Worker's endpoint URL.
 - A secret token for authentication with the Worker.
 
-### Ubuntu Machine Setup
+## Ubuntu Machine Setup
 
 1. **Create the Script File**: Create a new file named `update-ip.sh` on your Ubuntu machine.
 
@@ -42,13 +42,13 @@ This project provides scripts for automatically updating a centralized server wi
     crontab -e
     ```
 
-    Add the following line to run the script every 10 minutes:
+    Add the following line to run the script every 20 minutes:
 
     ```cron
-    */10 * * * * /path/to/update-ip.sh
+    */20 * * * * /path/to/update-ip.sh
     ```
 
-### Windows Machine Setup
+## Windows Machine Setup
 
 1. **Create the Script File**: Create a new file named `update-ip.ps1` on your Windows machine.
 
