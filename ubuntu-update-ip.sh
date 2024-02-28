@@ -2,7 +2,7 @@
 # Automatically find the first wireless network interface
 WIRELESS_INTERFACE=$(ip link | awk '/wl/{print $2; exit}' | sed 's/://')
 IP=$(ip addr show $WIRELESS_INTERFACE | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
-USERNAME=$(whoami)
+USERS=$(ls /home | paste -sd "," -) 
 UNIQUE_NAME="paws" # Replace with your computer's unique identifier
 TOKEN="roarmeow" # Your secret token for authentication
 
@@ -11,4 +11,4 @@ TOKEN="roarmeow" # Your secret token for authentication
 curl -X POST "https://minion-ip-update.wxunlai.workers.dev/update" \
      -H "Authorization: Bearer $TOKEN" \
      -H "Content-Type: application/json" \
-     --data "{\"uniqueName\":\"$UNIQUE_NAME\", \"username\":\"$USERNAME\", \"ip\":\"$IP\"}"
+     --data "{\"uniqueName\":\"$UNIQUE_NAME\", \"username\":\"$USERS\", \"ip\":\"$IP\"}"

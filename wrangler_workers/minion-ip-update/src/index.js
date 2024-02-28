@@ -101,7 +101,7 @@ async function handleView(request) {
     <table>
         <tr>
             <th>Computer Name</th>
-            <th>Username</th>
+            <th>Users / Usernames</th>
             <th>IP Address</th>
             <th>Last Updated</th>
         </tr>`;
@@ -111,12 +111,12 @@ async function handleView(request) {
     const data = await DEVICE_DATA.get(key.name);
     if (data) {
       const { username, ip, lastUpdated } = JSON.parse(data);
-      // Format the timestamp for readability
       const formattedTime = new Date(lastUpdated).toLocaleString();
+      const userNamesFormatted = username.split(",").join("<br>"); // Split by comma, join with HTML break line
       htmlContent += `
         <tr>
-            <td>${key.name.replace('device-', '')}</td>
-            <td>${username}</td>
+            <td>${key.name.replace("device-", "")}</td>
+            <td>${userNamesFormatted}</td>
             <td>${ip}</td>
             <td>${formattedTime}</td>
         </tr>`;
