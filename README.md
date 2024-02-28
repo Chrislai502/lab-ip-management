@@ -41,7 +41,6 @@ This project provides scripts for automatically updating a centralized server wi
 ## Windows Machine Setup
 
 1. **Create the Script File**: Create a new file named `update-ip.ps1` on your Windows machine.
-
 2. **Script Content**: Copy the following PowerShell script into `update-ip.ps1`, replacing placeholders with actual values:
 
     ```powershell
