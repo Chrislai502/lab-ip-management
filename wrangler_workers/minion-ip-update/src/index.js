@@ -8,22 +8,6 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-// Define global HTML template parts
-// const htmlHeader = `
-// <!DOCTYPE html>
-// <html lang="en">
-// <head>
-//     <meta charset="UTF-8">
-//     <title>Network Devices Status</title>
-// </head>
-// <body>
-//     <h1>Network Devices Status</h1>
-//     <ul>`;
-// const htmlFooter = `
-//     </ul>
-// </body>
-// </html>`;
-
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request));
 });
