@@ -17,20 +17,7 @@ This project provides scripts for automatically updating a centralized server wi
 
 ## Ubuntu Machine Setup
 
-1. **Script Modification**: Replace the unique username and all placeholders in `ubuntu-update-ip.sh`:
-
-    ```bash
-    #!/bin/bash
-    IP=$(hostname -I | cut -d' ' -f1)
-    USERNAME=$(whoami)
-    UNIQUE_NAME="unique-computer-identifier" # Replace with your computer's unique identifier
-    TOKEN="your_secret_token" # Your secret token for authentication
-    
-    curl -X POST "https://your-worker-endpoint/update" \
-         -H "Authorization: Bearer $TOKEN" \
-         -H "Content-Type: application/json" \
-         --data "{\"uniqueName\":\"$UNIQUE_NAME\", \"username\":\"$USERNAME\", \"ip\":\"$IP\"}"
-    ```
+1. **Local Environment Details**: Rename `sample.env` into `.env`, and then name your device (Computer). The secret token will be given at the end of these instructions.:
 
 2. **Make Executable**: Grant execution permissions to the script:
 
@@ -49,7 +36,7 @@ This project provides scripts for automatically updating a centralized server wi
     ```cron
     */20 * * * * /path/to/ubuntu-update-ip.sh
     ```
-5. Add secret token. Good, if you have read all the above, the TOKEN is `roarmeow`
+5. **Add secret token:** Good, if you have read all the above, the TOKEN is `roarmeow`. Add it to the `.env` file.
 
 ## Windows Machine Setup
 
