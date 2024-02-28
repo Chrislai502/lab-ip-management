@@ -64,8 +64,13 @@ async function handleUpdate(request) {
   try {
     const { uniqueName, username, ip } = await request.json();
     const key = `device-${uniqueName}`;
-    const now = new Date();
-    const value = JSON.stringify({ username, ip, lastUpdated: now.toISOString() });
+
+    // Get current date/time in PST
+    const date = new Date();
+    const pstDate = new Date(date.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }));
+    const lastUpdated = pstDate.toISOString().split('T').join(' ').slice(0, 19); // Format as 'YYYY-MM-DD HH:MM:SS'
+    const value = JSON.stringify({ username, ip, lastUpdated });
+    
     await DEVICE_DATA.put(key, value);
     return new Response("Device updated successfully", { status: 200 });
   } catch (e) {
