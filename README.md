@@ -17,9 +17,7 @@ This project provides scripts for automatically updating a centralized server wi
 
 ## Ubuntu Machine Setup
 
-1. **Create the Script File**: Create a new file named `update-ip.sh` on your Ubuntu machine.
-
-2. **Script Content**: Copy the following script into `update-ip.sh`, replacing placeholders with actual values:
+1. **Script Modification**: Replace the placeholders in `ubuntu-update-ip.sh`:
 
     ```bash
     #!/bin/bash
@@ -34,10 +32,10 @@ This project provides scripts for automatically updating a centralized server wi
          --data "{\"uniqueName\":\"$UNIQUE_NAME\", \"username\":\"$USERNAME\", \"ip\":\"$IP\"}"
     ```
 
-3. **Make Executable**: Grant execution permissions to the script:
+2. **Make Executable**: Grant execution permissions to the script:
 
     ```bash
-    chmod +x update-ip.sh
+    chmod +x ubuntu-update-ip.sh
     ```
 
 4. **Cron Job Setup**: To automatically run the script at regular intervals, add a cron job:
@@ -49,7 +47,7 @@ This project provides scripts for automatically updating a centralized server wi
     Add the following line to run the script every 20 minutes:
 
     ```cron
-    */20 * * * * /path/to/update-ip.sh
+    */20 * * * * /path/to/ubuntu-update-ip.sh
     ```
 
 ## Windows Machine Setup
