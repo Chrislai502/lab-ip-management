@@ -17,7 +17,7 @@ This project provides scripts for automatically updating a centralized server wi
 
 ## Ubuntu Machine Setup
 
-1. **Script Modification**: Replace the placeholders in `ubuntu-update-ip.sh`:
+1. **Script Modification**: Replace the unique username and all placeholders in `ubuntu-update-ip.sh`:
 
     ```bash
     #!/bin/bash
@@ -49,6 +49,7 @@ This project provides scripts for automatically updating a centralized server wi
     ```cron
     */20 * * * * /path/to/ubuntu-update-ip.sh
     ```
+5. Add secret token. Good, if you have read all the above, the TOKEN is `roarmeow`
 
 ## Windows Machine Setup
 
