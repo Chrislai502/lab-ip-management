@@ -3,8 +3,8 @@
 WIRELESS_INTERFACE=$(ip link | awk '/wl/{print $2; exit}' | sed 's/://')
 IP=$(ip addr show $WIRELESS_INTERFACE | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
 USERS=$(ls /home | paste -sd "," -) 
-UNIQUE_NAME="paws" # Replace with your computer's unique identifier
-TOKEN="roarmeow" # Your secret token for authentication
+UNIQUE_NAME="Thy Computah Name" # Replace with your computer's unique identifier
+TOKEN="Thy Secret Token" # Your secret token for authentication
 
 # Use the -H flag to add headers for Content-Type and Authorization
 # Use the --data flag to send the payload as JSON
